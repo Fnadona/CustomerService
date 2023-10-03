@@ -42,7 +42,7 @@ public class CustomerEntity {
     @Column(name = "DES_STATUS")
     private String accountStatus;
 
-    public CustomerEntity toEntity(Customer customer){
+    public CustomerEntity convertingCustomerToEntity(Customer customer){
 
         this.setName(customer.getName());
         this.setStreet(customer.getAddress().getStreet());

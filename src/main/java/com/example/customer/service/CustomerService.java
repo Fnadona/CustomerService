@@ -14,6 +14,6 @@ public class CustomerService {
     private CustomerEntity customerEntity;
 
     public void saveCustomer(Customer customer){
-        customerRepository.save(customerEntity.toEntity(customer));
+        customerRepository.save(customerEntity.convertingCustomerToEntity(customer));
     }
 }
