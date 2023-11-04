@@ -2,12 +2,7 @@ package com.example.customer.model.entity;
 
 import com.example.customer.model.AccountStatus;
 import com.example.customer.model.Customer;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -24,10 +19,11 @@ public class CustomerEntity {
     @Column(name = "DES_NAME")
     private String name;
 
-    @Column(name = "DES_ADDRESS")
-    private String street;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "COD_ADDRESS_ID", referencedColumnName = "COD_ID")
+    private AddressEntity address;
 
-    @Column(name = "TYP_DOCUMENT")
+    @Column(name = "TYP_DOCUMENT_TYPE")
     private String documentType;
 
     @Column(name = "DES_DOCUMENT")
@@ -42,10 +38,10 @@ public class CustomerEntity {
     @Column(name = "DES_STATUS")
     private String accountStatus;
 
-    public CustomerEntity convertingCustomerToEntity(Customer customer){
+    public CustomerEntity fromCustomer(Customer customer){
 
         this.setName(customer.getName());
-        this.setStreet(customer.getAddress().getStreet());
+        this.setAddress(new AddressEntity(customer.getAddress()));
         this.setDocumentType(customer.getDocumentType().toString());
         this.setDocument(customer.getDocument());
         this.setEmail(customer.getEmail());
