@@ -1,16 +1,20 @@
 package com.example.customer.model.entity;
 
 import com.example.customer.model.enums.AccountStatus;
+import com.example.customer.model.enums.DocumentType;
 import com.example.customer.model.request.CustomerRequest;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
 @Data
 @Table(name = "CUSTOMER_INFO")
+@NoArgsConstructor
 public class CustomerEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "COD_ID")
@@ -24,7 +28,7 @@ public class CustomerEntity {
     private AddressEntity address;
 
     @Column(name = "TYP_DOCUMENT_TYPE")
-    private String documentType;
+    private DocumentType documentType;
 
     @Column(name = "DES_DOCUMENT")
     private String document;
@@ -36,18 +40,17 @@ public class CustomerEntity {
     private String phone;
 
     @Column(name = "DES_STATUS")
-    private String accountStatus;
+    private AccountStatus accountStatus;
 
-    public CustomerEntity fromCustomer(CustomerRequest customer){
+    public CustomerEntity (CustomerRequest customer){
 
-        this.setName(customer.getName());
-        this.setAddress(new AddressEntity(customer.getAddress()));
-        this.setDocumentType(customer.getDocumentType().toString());
-        this.setDocument(customer.getDocument());
-        this.setEmail(customer.getEmail());
-        this.setPhone(customer.getPhone());
-        this.setAccountStatus(AccountStatus.INACTIVE.toString());
+        this.name = customer.getName();
+        this.address = new AddressEntity(customer.getAddress());
+        this.documentType = customer.getDocumentType();
+        this.document = customer.getDocument();
+        this.email = customer.getEmail();
+        this.phone = customer.getPhone();
+        this.accountStatus = AccountStatus.INACTIVE;
 
-        return this;
     }
 }

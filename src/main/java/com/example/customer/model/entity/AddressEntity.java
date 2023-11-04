@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AddressEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "COD_ID")
@@ -40,6 +41,7 @@ public class AddressEntity {
     private String country;
 
     public AddressEntity(Address address){
+
         this.street = address.getStreet();
         this.number = address.getNumber();
         this.complement = address.getComplement();
@@ -47,5 +49,6 @@ public class AddressEntity {
         this.city = address.getCity();
         this.postalCode = address.getPostalCode();
         this.country = address.getCountry();
+
     }
 }
