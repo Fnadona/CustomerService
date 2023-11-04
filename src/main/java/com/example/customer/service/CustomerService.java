@@ -1,6 +1,6 @@
 package com.example.customer.service;
 
-import com.example.customer.model.Customer;
+import com.example.customer.model.request.CustomerRequest;
 import com.example.customer.model.entity.CustomerEntity;
 import com.example.customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ public class CustomerService {
     @Autowired
     private CustomerEntity customerEntity;
 
-    public void saveCustomer(Customer customer){
+    public void saveCustomer(CustomerRequest customer){
         customerRepository.save(customerEntity.fromCustomer(customer));
     }
 }

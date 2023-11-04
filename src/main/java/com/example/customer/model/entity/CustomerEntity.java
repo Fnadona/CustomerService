@@ -1,7 +1,7 @@
 package com.example.customer.model.entity;
 
-import com.example.customer.model.AccountStatus;
-import com.example.customer.model.Customer;
+import com.example.customer.model.enums.AccountStatus;
+import com.example.customer.model.request.CustomerRequest;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -38,7 +38,7 @@ public class CustomerEntity {
     @Column(name = "DES_STATUS")
     private String accountStatus;
 
-    public CustomerEntity fromCustomer(Customer customer){
+    public CustomerEntity fromCustomer(CustomerRequest customer){
 
         this.setName(customer.getName());
         this.setAddress(new AddressEntity(customer.getAddress()));

@@ -1,4 +1,4 @@
-package com.example.customer.model;
+package com.example.customer.model.enums;
 
 public enum AccountStatus {
     ACTIVE, INACTIVE;

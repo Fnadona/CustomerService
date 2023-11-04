@@ -1,5 +1,7 @@
-package com.example.customer.model;
+package com.example.customer.model.request;
 
+import com.example.customer.model.Address;
+import com.example.customer.model.enums.DocumentType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Customer {
+public class CustomerRequest {
     private String name;
     private Address address;
     private DocumentType documentType;
