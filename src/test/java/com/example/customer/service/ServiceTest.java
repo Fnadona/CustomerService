@@ -1,5 +1,6 @@
 package com.example.customer.service;
 
+import com.example.customer.CustomerApplication;
 import com.example.customer.model.Address;
 import com.example.customer.model.enums.AccountStatus;
 import com.example.customer.model.enums.DocumentType;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = {CustomerApplication.class})
 public class ServiceTest {
 
     @Autowired

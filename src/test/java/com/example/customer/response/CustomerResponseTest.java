@@ -1,4 +1,4 @@
-package com.example.customer;
+package com.example.customer.response;
 
 import com.example.customer.model.entity.AddressEntity;
 import com.example.customer.model.entity.CustomerEntity;
