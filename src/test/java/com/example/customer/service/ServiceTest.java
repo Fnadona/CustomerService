@@ -17,12 +17,6 @@ public class ServiceTest {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private CustomerRequest customerRequest;
-
-    @Autowired
-    private Address address;
-
     @Test
     @DisplayName("Testing registerCustomer method")
     void registerCustomerTest(){
@@ -49,6 +43,8 @@ public class ServiceTest {
 
     private CustomerRequest createCustomerRequest(){
 
+        CustomerRequest customerRequest = new CustomerRequest();
+
         customerRequest.setName("Nome teste");
         customerRequest.setAddress(createAddress());
         customerRequest.setDocumentType(DocumentType.DRIVE_LICENSE);
@@ -60,6 +56,8 @@ public class ServiceTest {
     }
 
     private Address createAddress(){
+
+        Address address = new Address();
 
         address.setStreet("Rua teste");
         address.setNumber("123456");

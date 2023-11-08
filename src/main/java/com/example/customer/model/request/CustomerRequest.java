@@ -6,11 +6,9 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Data
 @NoArgsConstructor
-@Component
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CustomerRequest {
     private String name;

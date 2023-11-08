@@ -6,10 +6,8 @@ import com.example.customer.model.request.CustomerRequest;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Entity
-@Component
 @Data
 @Table(name = "CUSTOMER_INFO")
 @NoArgsConstructor
