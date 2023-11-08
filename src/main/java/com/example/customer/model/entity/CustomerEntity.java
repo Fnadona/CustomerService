@@ -1,7 +1,6 @@
 package com.example.customer.model.entity;
 
 import com.example.customer.model.enums.AccountStatus;
-import com.example.customer.model.enums.DocumentType;
 import com.example.customer.model.request.CustomerRequest;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,7 +25,7 @@ public class CustomerEntity {
     private AddressEntity address;
 
     @Column(name = "TYP_DOCUMENT_TYPE")
-    private DocumentType documentType;
+    private String documentType;
 
     @Column(name = "DES_DOCUMENT")
     private String document;
@@ -38,17 +37,17 @@ public class CustomerEntity {
     private String phone;
 
     @Column(name = "DES_STATUS")
-    private AccountStatus accountStatus;
+    private String accountStatus;
 
     public CustomerEntity (CustomerRequest customer){
 
         this.name = customer.getName();
         this.address = new AddressEntity(customer.getAddress());
-        this.documentType = customer.getDocumentType();
+        this.documentType = customer.getDocumentType().name();
         this.document = customer.getDocument();
         this.email = customer.getEmail();
         this.phone = customer.getPhone();
-        this.accountStatus = AccountStatus.INACTIVE;
+        this.accountStatus = AccountStatus.INACTIVE.name();
 
     }
 }

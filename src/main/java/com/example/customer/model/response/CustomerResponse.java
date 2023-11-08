@@ -32,11 +32,11 @@ public class CustomerResponse {
         this.customerId = customerEntity.getId();
         this.name = customerEntity.getName();
         this.address = new Address(customerEntity.getAddress());
-        this.documentType = customerEntity.getDocumentType();
+        this.documentType = DocumentType.valueOf(customerEntity.getDocumentType());
         this.document = customerEntity.getDocument();
         this.email = customerEntity.getEmail();
         this.phone = customerEntity.getPhone();
-        this.accountStatus = customerEntity.getAccountStatus();
+        this.accountStatus = AccountStatus.valueOf(customerEntity.getAccountStatus());
 
         return this;
 
