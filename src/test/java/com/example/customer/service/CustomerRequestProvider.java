@@ -7,7 +7,7 @@ import com.example.customer.model.request.CustomerRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomerRequestProvider {
+public abstract class CustomerRequestProvider {
 
     static private final Map<String, CustomerRequest> providers = new HashMap<>();
     static public Map<String, CustomerRequest> getProviders(){
