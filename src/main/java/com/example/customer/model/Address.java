@@ -1,6 +1,8 @@
 package com.example.customer.model;
 
 import com.example.customer.model.entity.AddressEntity;
+import com.example.customer.exceptions.ErrorMessage;
+import com.example.customer.utils.RegexUtils;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
@@ -14,31 +16,31 @@ import lombok.*;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Address {
 
-    @NotBlank(message = "{blank.street.message}")
-    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]|[0-9]|º|ª| )*$", message = "{invalid.street.format.message}")
+    @NotBlank(message = ErrorMessage.BLANK_STREET_MESSAGE)
+    @Pattern(regexp = RegexUtils.LETTER_AND_NUMBER_REGEX, message = ErrorMessage.INVALID_STREET_FORMAT_MESSAGE)
     private String street;
 
-    @NotBlank(message = "{blank.number.message}")
-    @Pattern(regexp = "^[0-9]*$", message = "{invalid.number.format.message}")
+    @NotBlank(message = ErrorMessage.BLANK_NUMBER_MESSAGE)
+    @Pattern(regexp = RegexUtils.NUMBER_FIELD_REGEX, message = ErrorMessage.INVALID_NUMBER_FORMAT_MESSAGE)
     private String number;
 
-    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]|[0-9]|º|ª| )*$", message = "{invalid.complement.format.message}")
+    @Pattern(regexp = RegexUtils.LETTER_AND_NUMBER_REGEX, message = ErrorMessage.INVALID_COMPLEMENT_FORMAT_MESSAGE)
     private String complement;
 
-    @NotBlank(message = "{blank.district.message}")
-    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]|[0-9]|º|ª| )*$", message = "{invalid.district.format.message}")
+    @NotBlank(message = ErrorMessage.BLANK_DISTRICT_MESSAGE)
+    @Pattern(regexp = RegexUtils.LETTER_AND_NUMBER_REGEX, message = ErrorMessage.INVALID_DISTRICT_FORMAT_MESSAGE)
     private String district;
 
-    @NotBlank(message = "{blank.city.message}")
-    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]| )*$", message = "{invalid.city.format.message}")
+    @NotBlank(message = ErrorMessage.BLANK_CITY_MESSAGE)
+    @Pattern(regexp = RegexUtils.LETTER_REGEX, message = ErrorMessage.INVALID_CITY_FORMAT_MESSAGE)
     private String city;
 
-    @NotBlank(message = "{blank.postal.code.message}")
-    @Pattern(regexp = "^[0-9]*$", message = "{invalid.postal.code.format.message}")
+    @NotBlank(message = ErrorMessage.BLANK_POSTAL_CODE_MESSAGE)
+    @Pattern(regexp = RegexUtils.NUMBER_FIELD_REGEX, message = ErrorMessage.INVALID_POSTAL_CODE_FORMAT_MESSAGE)
     private String postalCode;
 
-    @NotBlank(message = "{blank.country.message}")
-    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]| )*$", message = "{invalid.country.format.message}")
+    @NotBlank(message = ErrorMessage.BLANK_COUNTRY_MESSAGE)
+    @Pattern(regexp = RegexUtils.LETTER_REGEX, message = ErrorMessage.INVALID_COUNTRY_FORMAT_MESSAGE)
     private String country;
 
     public Address (AddressEntity addressEntity){

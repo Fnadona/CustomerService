@@ -1,6 +1,7 @@
 package com.example.customer.model.entity;
 
 import com.example.customer.model.Address;
+import com.example.customer.utils.FormatterUtil;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,13 +43,13 @@ public class AddressEntity {
 
     public AddressEntity(Address address){
 
-        this.street = address.getStreet().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
-        this.number = address.getNumber().toUpperCase();
-        this.complement = address.getComplement().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
-        this.district = address.getDistrict().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
-        this.city = address.getCity().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
-        this.postalCode = address.getPostalCode();
-        this.country = address.getCountry().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
+        this.street = FormatterUtil.formatField(address.getStreet());
+        this.number = address.getNumber().trim();
+        this.complement = FormatterUtil.formatField(address.getComplement());
+        this.district = FormatterUtil.formatField(address.getDistrict());
+        this.city = FormatterUtil.formatField(address.getCity());
+        this.postalCode = address.getPostalCode().trim();
+        this.country = FormatterUtil.formatField(address.getCountry());
 
     }
 }

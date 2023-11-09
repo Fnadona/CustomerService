@@ -1,5 +1,6 @@
 package com.example.customer.model.validation;
 
+import com.example.customer.exceptions.ErrorMessage;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -17,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = EnumValidator.class)
 public @interface EnumValidation {
     Class<? extends Enum<?>> enumClass();
-    String message() default "{enum.validation.message}";
+    String message() default ErrorMessage.ENUM_VALIDATION_MESSAGE;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

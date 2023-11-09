@@ -2,6 +2,7 @@ package com.example.customer.model.entity;
 
 import com.example.customer.model.enums.AccountStatus;
 import com.example.customer.model.request.CustomerRequest;
+import com.example.customer.utils.FormatterUtil;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,12 +42,12 @@ public class CustomerEntity {
 
     public CustomerEntity (CustomerRequest customer){
 
-        this.name = customer.getName().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
+        this.name = FormatterUtil.formatField(customer.getName());
         this.address = new AddressEntity(customer.getAddress());
         this.documentType = customer.getDocumentType().toUpperCase();
-        this.documentCode = customer.getDocumentCode().toUpperCase();
+        this.documentCode = customer.getDocumentCode().trim().toUpperCase();
         this.email = customer.getEmail().toUpperCase();
-        this.phone = customer.getPhone();
+        this.phone = customer.getPhone().trim();
         this.accountStatus = AccountStatus.INACTIVE.name();
 
     }

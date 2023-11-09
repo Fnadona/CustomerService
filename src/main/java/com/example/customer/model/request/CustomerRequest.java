@@ -2,7 +2,9 @@ package com.example.customer.model.request;
 
 import com.example.customer.model.Address;
 import com.example.customer.model.enums.DocumentType;
+import com.example.customer.exceptions.ErrorMessage;
 import com.example.customer.model.validation.EnumValidation;
+import com.example.customer.utils.RegexUtils;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.Valid;
@@ -17,27 +19,27 @@ import org.hibernate.validator.constraints.Length;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CustomerRequest {
 
-    @NotBlank(message = "{blank.name.message}")
-    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]| )*$")
+    @NotBlank(message = ErrorMessage.BLANK_NAME_MESSAGE)
+    @Pattern(regexp = RegexUtils.LETTER_REGEX)
     private String name;
 
     @Valid
-    @NotNull(message = "{null.address.message}")
+    @NotNull(message = ErrorMessage.NULL_ADDRESS_MESSAGE)
     private Address address;
 
-    @NotNull(message = "{null.document.type.message}")
-    @EnumValidation(enumClass = DocumentType.class, message = "{invalid.document.type.message}")
+    @NotNull(message = ErrorMessage.NULL_DOCUMENT_TYPE_MESSAGE)
+    @EnumValidation(enumClass = DocumentType.class, message = ErrorMessage.INVALID_DOCUMENT_TYPE_MESSAGE)
     private String documentType;
 
-    @NotBlank(message = "{blank.document.code.message}")
+    @NotBlank(message = ErrorMessage.BLANK_DOCUMENT_CODE_MESSAGE)
     private String documentCode;
 
-    @NotBlank(message = "{blank.email.message}")
-    @Email(message = "{invalid.email.message}", flags = {Pattern.Flag.CASE_INSENSITIVE})
+    @NotBlank(message = ErrorMessage.BLANK_EMAIL_MESSAGE)
+    @Email(message = ErrorMessage.INVALID_EMAIL_FORMAT_MESSAGE, flags = {Pattern.Flag.CASE_INSENSITIVE})
     private String email;
 
-    @Pattern(regexp = "^[0-9]+$", message = "{invalid.phone.format.message}")
-    @Length(min = 9, max=15, message = "{invalid.phone.length.message}")
+    @Pattern(regexp = RegexUtils.NUMBER_FIELD_REGEX, message = ErrorMessage.INVALID_PHONE_FORMAT_MESSAGE)
+    @Length(min = 9, max=15, message = ErrorMessage.INVALID_PHONE_LENGTH_MESSAGE)
     private String phone;
 
 }
