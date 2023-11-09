@@ -26,11 +26,11 @@ public class CustomerResponseTest {
         Assertions.assertNotNull(response.getCustomerId());
 
         Assertions.assertEquals(customerEntity.getName(), response.getName());
-        Assertions.assertEquals(DocumentType.valueOf(customerEntity.getDocumentType()), response.getDocumentType());
+        Assertions.assertEquals(customerEntity.getDocumentType(), response.getDocumentType());
         Assertions.assertEquals(customerEntity.getDocument(), response.getDocument());
         Assertions.assertEquals(customerEntity.getEmail(), response.getEmail());
         Assertions.assertEquals(customerEntity.getPhone(), response.getPhone());
-        Assertions.assertEquals(AccountStatus.valueOf(customerEntity.getAccountStatus()), response.getAccountStatus());
+        Assertions.assertEquals(customerEntity.getAccountStatus(), response.getAccountStatus());
 
         Assertions.assertEquals(customerEntity.getAddress().getStreet(), response.getAddress().getStreet());
         Assertions.assertEquals(customerEntity.getAddress().getNumber(), response.getAddress().getNumber());
@@ -48,7 +48,7 @@ public class CustomerResponseTest {
         customerEntity.setId(123L);
         customerEntity.setName("Nome teste");
         customerEntity.setAddress(createAddressEntity());
-        customerEntity.setDocumentType(DocumentType.DRIVE_LICENSE.name());
+        customerEntity.setDocumentType(DocumentType.CPF.name());
         customerEntity.setDocument("documento teste");
         customerEntity.setEmail("emailteste@teste.com");
         customerEntity.setPhone("321654987");

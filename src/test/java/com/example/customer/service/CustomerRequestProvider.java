@@ -34,7 +34,7 @@ public abstract class CustomerRequestProvider {
             CustomerRequest.builder()
                 .name("Nome teste")
                 .address(addressWithAllFields)
-                .documentType(DocumentType.DRIVE_LICENSE)
+                .documentType(DocumentType.CPF.name())
                 .document("Documento teste")
                 .email("emailteste@teste.com")
                 .phone("321654987")
@@ -44,7 +44,7 @@ public abstract class CustomerRequestProvider {
             CustomerRequest.builder()
                 .name("Nome teste")
                 .address(addressWithAllFields)
-                .documentType(DocumentType.DRIVE_LICENSE)
+                .documentType(DocumentType.CPF.name())
                 .document("Documento teste")
                 .email("emailteste@teste.com")
                 .build();

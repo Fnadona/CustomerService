@@ -38,7 +38,7 @@ public class ServiceTest {
         Assertions.assertEquals(customerRequest.getDocument(), customerResponse.getDocument());
         Assertions.assertEquals(customerRequest.getEmail(), customerResponse.getEmail());
         Assertions.assertEquals(customerRequest.getPhone(), customerResponse.getPhone());
-        Assertions.assertEquals(AccountStatus.INACTIVE, customerResponse.getAccountStatus());
+        Assertions.assertEquals(AccountStatus.INACTIVE.name(), customerResponse.getAccountStatus());
 
         Assertions.assertEquals(customerRequest.getAddress().getStreet(), customerResponse.getAddress().getStreet());
         Assertions.assertEquals(customerRequest.getAddress().getNumber(), customerResponse.getAddress().getNumber());

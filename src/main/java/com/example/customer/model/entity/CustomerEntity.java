@@ -43,7 +43,7 @@ public class CustomerEntity {
 
         this.name = customer.getName();
         this.address = new AddressEntity(customer.getAddress());
-        this.documentType = customer.getDocumentType().name();
+        this.documentType = customer.getDocumentType();
         this.document = customer.getDocument();
         this.email = customer.getEmail();
         this.phone = customer.getPhone();

@@ -21,22 +21,22 @@ public class CustomerResponse {
     private Long customerId;
     private String name;
     private Address address;
-    private DocumentType documentType;
+    private String documentType;
     private String document;
     private String email;
     private String phone;
-    private AccountStatus accountStatus;
+    private String accountStatus;
 
     public CustomerResponse fromEntity(CustomerEntity customerEntity){
 
         this.customerId = customerEntity.getId();
         this.name = customerEntity.getName();
         this.address = new Address(customerEntity.getAddress());
-        this.documentType = DocumentType.valueOf(customerEntity.getDocumentType());
+        this.documentType = customerEntity.getDocumentType();
         this.document = customerEntity.getDocument();
         this.email = customerEntity.getEmail();
         this.phone = customerEntity.getPhone();
-        this.accountStatus = AccountStatus.valueOf(customerEntity.getAccountStatus());
+        this.accountStatus = customerEntity.getAccountStatus();
 
         return this;
 

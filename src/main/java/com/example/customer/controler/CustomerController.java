@@ -31,7 +31,8 @@ public class CustomerController {
 
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception e) {
-            log.error("An error occurred. \nMESSAGE = {} \nCAUSE = {}", e.getMessage(), e.getCause().toString());
+            log.error("An error occurred. ERROR = {}", e.toString());
+
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

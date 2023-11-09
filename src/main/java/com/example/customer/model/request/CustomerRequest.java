@@ -2,13 +2,11 @@ package com.example.customer.model.request;
 
 import com.example.customer.model.Address;
 import com.example.customer.model.enums.DocumentType;
+import com.example.customer.model.validation.DocumentTypeValidation;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data
@@ -22,9 +20,12 @@ public class CustomerRequest {
     private String name;
 
     @Valid
+    @NotNull(message = "The address is required")
     private Address address;
 
-    private DocumentType documentType;
+    @NotNull(message = "The document type is required")
+    @DocumentTypeValidation(enumClass = DocumentType.class)
+    private String documentType;
 
     @NotBlank(message = "The document is required")
     private String document;
@@ -34,4 +35,5 @@ public class CustomerRequest {
     private String email;
 
     private String phone;
+
 }
