@@ -3,6 +3,7 @@ package com.example.customer.controler;
 import com.example.customer.model.request.CustomerRequest;
 import com.example.customer.model.response.CustomerResponse;
 import com.example.customer.service.CustomerService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CustomerController {
     private static final Logger log = LoggerFactory.getLogger(CustomerController.class.getSimpleName());
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> createCustomer(@RequestBody CustomerRequest customer) {
+    public ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody  CustomerRequest customer) {
 
         log.info("Requesting for create a customer");
 

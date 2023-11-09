@@ -3,10 +3,8 @@ package com.example.customer.model;
 import com.example.customer.model.entity.AddressEntity;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -15,12 +13,24 @@ import lombok.NoArgsConstructor;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Address {
 
+    @NotBlank(message = "The street is required")
     private String street;
+
+    @NotBlank(message = "The number is required")
     private String number;
+
     private String complement;
+
+    @NotBlank(message = "The district is required")
     private String district;
+
+    @NotBlank(message = "The city is required")
     private String city;
+
+    @NotBlank(message = "The postal code is required")
     private String postalCode;
+
+    @NotBlank(message = "The country is required")
     private String country;
 
     public Address (AddressEntity addressEntity){
