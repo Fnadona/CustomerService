@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.SQLException;
-
 @SpringBootTest(classes = {CustomerApplication.class})
 public class ServiceTest {
 
@@ -35,7 +33,7 @@ public class ServiceTest {
 
         Assertions.assertEquals(customerRequest.getName(), customerResponse.getName());
         Assertions.assertEquals(customerRequest.getDocumentType(), customerResponse.getDocumentType());
-        Assertions.assertEquals(customerRequest.getDocument(), customerResponse.getDocument());
+        Assertions.assertEquals(customerRequest.getDocumentCode(), customerResponse.getDocumentCode());
         Assertions.assertEquals(customerRequest.getEmail(), customerResponse.getEmail());
         Assertions.assertEquals(customerRequest.getPhone(), customerResponse.getPhone());
         Assertions.assertEquals(AccountStatus.INACTIVE.name(), customerResponse.getAccountStatus());

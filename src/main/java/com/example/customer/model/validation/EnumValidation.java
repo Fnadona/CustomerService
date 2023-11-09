@@ -14,10 +14,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({FIELD})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = DocumentTypeValidator.class)
-public @interface DocumentTypeValidation {
+@Constraint(validatedBy = EnumValidator.class)
+public @interface EnumValidation {
     Class<? extends Enum<?>> enumClass();
-    String message() default "Document type is invalid. It must be one of types in {enumClass}";
+    String message() default "{enum.validation.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

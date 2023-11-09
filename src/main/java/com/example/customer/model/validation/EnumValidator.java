@@ -1,6 +1,5 @@
 package com.example.customer.model.validation;
 
-import com.example.customer.model.enums.DocumentType;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -8,11 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class DocumentTypeValidator implements ConstraintValidator<DocumentTypeValidation, String> {
+public class EnumValidator implements ConstraintValidator<EnumValidation, String> {
     private List<String> acceptedValues;
 
     @Override
-    public void initialize(DocumentTypeValidation annotation) {
+    public void initialize(EnumValidation annotation) {
         this.acceptedValues = Stream.of(annotation.enumClass().getEnumConstants())
                 .map(Enum::name)
                 .collect(Collectors.toList());
@@ -24,7 +23,7 @@ public class DocumentTypeValidator implements ConstraintValidator<DocumentTypeVa
             return true;
         }
 
-        return acceptedValues.contains(value);
+        return acceptedValues.contains(value.toUpperCase());
     }
 }
 

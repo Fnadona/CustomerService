@@ -27,8 +27,8 @@ public class CustomerEntity {
     @Column(name = "TYP_DOCUMENT_TYPE")
     private String documentType;
 
-    @Column(name = "DES_DOCUMENT")
-    private String document;
+    @Column(name = "DES_DOCUMENT_CODE")
+    private String documentCode;
 
     @Column(name = "DES_EMAIL")
     private String email;
@@ -41,11 +41,11 @@ public class CustomerEntity {
 
     public CustomerEntity (CustomerRequest customer){
 
-        this.name = customer.getName();
+        this.name = customer.getName().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
         this.address = new AddressEntity(customer.getAddress());
-        this.documentType = customer.getDocumentType();
-        this.document = customer.getDocument();
-        this.email = customer.getEmail();
+        this.documentType = customer.getDocumentType().toUpperCase();
+        this.documentCode = customer.getDocumentCode().toUpperCase();
+        this.email = customer.getEmail().toUpperCase();
         this.phone = customer.getPhone();
         this.accountStatus = AccountStatus.INACTIVE.name();
 

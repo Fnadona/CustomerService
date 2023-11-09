@@ -42,13 +42,13 @@ public class AddressEntity {
 
     public AddressEntity(Address address){
 
-        this.street = address.getStreet();
-        this.number = address.getNumber();
-        this.complement = address.getComplement();
-        this.district = address.getDistrict();
-        this.city = address.getCity();
+        this.street = address.getStreet().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
+        this.number = address.getNumber().toUpperCase();
+        this.complement = address.getComplement().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
+        this.district = address.getDistrict().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
+        this.city = address.getCity().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
         this.postalCode = address.getPostalCode();
-        this.country = address.getCountry();
+        this.country = address.getCountry().trim().replaceAll( "[ ]{2,}", " ").toUpperCase();
 
     }
 }

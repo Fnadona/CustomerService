@@ -35,7 +35,7 @@ public abstract class CustomerRequestProvider {
                 .name("Nome teste")
                 .address(addressWithAllFields)
                 .documentType(DocumentType.CPF.name())
-                .document("Documento teste")
+                .documentCode("Documento teste")
                 .email("emailteste@teste.com")
                 .phone("321654987")
                 .build();
@@ -45,7 +45,7 @@ public abstract class CustomerRequestProvider {
                 .name("Nome teste")
                 .address(addressWithAllFields)
                 .documentType(DocumentType.CPF.name())
-                .document("Documento teste")
+                .documentCode("Documento teste")
                 .email("emailteste@teste.com")
                 .build();
 }

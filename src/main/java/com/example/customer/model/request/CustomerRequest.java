@@ -2,12 +2,13 @@ package com.example.customer.model.request;
 
 import com.example.customer.model.Address;
 import com.example.customer.model.enums.DocumentType;
-import com.example.customer.model.validation.DocumentTypeValidation;
+import com.example.customer.model.validation.EnumValidation;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 @NoArgsConstructor
@@ -16,24 +17,27 @@ import lombok.*;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CustomerRequest {
 
-    @NotBlank(message = "The name is required")
+    @NotBlank(message = "{blank.name.message}")
+    @Pattern(regexp = "^([a-zA-Z]|[à-ü]|[À-Ü]| )*$")
     private String name;
 
     @Valid
-    @NotNull(message = "The address is required")
+    @NotNull(message = "{null.address.message}")
     private Address address;
 
-    @NotNull(message = "The document type is required")
-    @DocumentTypeValidation(enumClass = DocumentType.class)
+    @NotNull(message = "{null.document.type.message}")
+    @EnumValidation(enumClass = DocumentType.class, message = "{invalid.document.type.message}")
     private String documentType;
 
-    @NotBlank(message = "The document is required")
-    private String document;
+    @NotBlank(message = "{blank.document.code.message}")
+    private String documentCode;
 
-    @NotBlank(message = "The email is required")
-    @Email(message = "The email is invalid", flags = {Pattern.Flag.CASE_INSENSITIVE})
+    @NotBlank(message = "{blank.email.message}")
+    @Email(message = "{invalid.email.message}", flags = {Pattern.Flag.CASE_INSENSITIVE})
     private String email;
 
+    @Pattern(regexp = "^[0-9]+$", message = "{invalid.phone.format.message}")
+    @Length(min = 9, max=15, message = "{invalid.phone.length.message}")
     private String phone;
 
 }

@@ -2,8 +2,6 @@ package com.example.customer.model.response;
 
 import com.example.customer.model.Address;
 import com.example.customer.model.entity.CustomerEntity;
-import com.example.customer.model.enums.AccountStatus;
-import com.example.customer.model.enums.DocumentType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -22,7 +20,7 @@ public class CustomerResponse {
     private String name;
     private Address address;
     private String documentType;
-    private String document;
+    private String documentCode;
     private String email;
     private String phone;
     private String accountStatus;
@@ -33,7 +31,7 @@ public class CustomerResponse {
         this.name = customerEntity.getName();
         this.address = new Address(customerEntity.getAddress());
         this.documentType = customerEntity.getDocumentType();
-        this.document = customerEntity.getDocument();
+        this.documentCode = customerEntity.getDocumentCode();
         this.email = customerEntity.getEmail();
         this.phone = customerEntity.getPhone();
         this.accountStatus = customerEntity.getAccountStatus();

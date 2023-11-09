@@ -27,7 +27,7 @@ public class CustomerResponseTest {
 
         Assertions.assertEquals(customerEntity.getName(), response.getName());
         Assertions.assertEquals(customerEntity.getDocumentType(), response.getDocumentType());
-        Assertions.assertEquals(customerEntity.getDocument(), response.getDocument());
+        Assertions.assertEquals(customerEntity.getDocumentCode(), response.getDocumentCode());
         Assertions.assertEquals(customerEntity.getEmail(), response.getEmail());
         Assertions.assertEquals(customerEntity.getPhone(), response.getPhone());
         Assertions.assertEquals(customerEntity.getAccountStatus(), response.getAccountStatus());
@@ -49,7 +49,7 @@ public class CustomerResponseTest {
         customerEntity.setName("Nome teste");
         customerEntity.setAddress(createAddressEntity());
         customerEntity.setDocumentType(DocumentType.CPF.name());
-        customerEntity.setDocument("documento teste");
+        customerEntity.setDocumentCode("documento teste");
         customerEntity.setEmail("emailteste@teste.com");
         customerEntity.setPhone("321654987");
         customerEntity.setAccountStatus(AccountStatus.INACTIVE.name());
