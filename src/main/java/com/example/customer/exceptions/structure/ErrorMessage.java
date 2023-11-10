@@ -3,6 +3,7 @@ package com.example.customer.exceptions.structure;
 public abstract class ErrorMessage {
 
     public static final String BLANK_NAME_MESSAGE = "The name is required.";
+    public static final String INVALID_NAME_FORMAT_MESSAGE = "There are invalid character in name (use only letters, letters with accents and numbers).";
     public static final String NULL_ADDRESS_MESSAGE = "The address is required.";
     public static final String NULL_DOCUMENT_TYPE_MESSAGE = "The document type is required.";
     public static final String ENUM_VALIDATION_MESSAGE = "Enum is invalid.";
@@ -26,6 +27,7 @@ public abstract class ErrorMessage {
     public static final String INVALID_NUMBER_FORMAT_MESSAGE = "There must be only numbers in field number.";
     public static final String INVALID_POSTAL_CODE_FORMAT_MESSAGE = "There must be only numbers in postal code.";
     public static final String SQL_PERSISTENCE_ERROR_MESSAGE = "It wasn't possible to persist the customer";
-    public static final String SQL_CUSTOMER_NOT_FOUND_MESSAGE = "Customer not found";
+    public static final String CUSTOMER_NOT_FOUND_MESSAGE = "Customer not found";
+    public static final String COMPLETING_INVALID_FIELD_MESSAGE = "Field filled in wrong";
 
 }

@@ -1,6 +1,11 @@
 package com.example.customer.exceptions;
 
-import com.example.customer.exceptions.structure.ErrorStructure;
+import com.example.customer.exceptions.structure.ErrorMessage;
+import com.example.customer.exceptions.structure.GeneralError;
+import com.example.customer.exceptions.structure.ErrorResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,18 +14,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @Autowired
+    private ErrorResponse errorResponse;
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class.getSimpleName());
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
                                                                   HttpStatusCode status, WebRequest request) {
-        Map<String, List<String>> body = new HashMap<>();
 
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
@@ -28,17 +35,29 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
 
-        body.put("errors", errors);
-
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return buildErrorResponse(
+                HttpStatus.BAD_REQUEST,
+                GeneralError.COMPLETING_INVALID_FIELD,
+                errors);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     protected ResponseEntity<Object> handleNotFound(RuntimeException ex) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
-        problemDetail.setTitle("User not found");
-        problemDetail.setType(URI.create("https://example.com/problems/user-not-found"));
-        problemDetail.setProperty("errors", List.of(ErrorStructure.API_USER_NOT_FOUND));
-        return new ResponseEntity<>(problemDetail, HttpStatus.NOT_FOUND);
+
+        log.error(ex.toString());
+
+        return buildErrorResponse(
+                HttpStatus.NOT_FOUND,
+                GeneralError.CUSTOMER_NOT_FOUND,
+                List.of(ErrorMessage.CUSTOMER_NOT_FOUND_MESSAGE));
+    }
+
+    private ResponseEntity<Object> buildErrorResponse(HttpStatus status, GeneralError generalError, List<String> errorMessageList){
+
+        errorResponse.setStatus(status);
+        errorResponse.setError(generalError);
+        errorResponse.setSpecificErrorMessages(errorMessageList);
+
+        return new ResponseEntity<>(errorResponse, status);
     }
 }

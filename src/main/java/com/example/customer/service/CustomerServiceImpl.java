@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService{
     public CustomerResponse getCustomerById(Long id) throws UserNotFoundException {
 
         CustomerEntity customerEntity = customerRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(ErrorMessage.SQL_CUSTOMER_NOT_FOUND_MESSAGE));
+                .orElseThrow(UserNotFoundException::new);
 
         return customerResponse.fromEntity(customerEntity);
     }

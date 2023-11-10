@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Length;
 public class CustomerRequest {
 
     @NotBlank(message = ErrorMessage.BLANK_NAME_MESSAGE)
-    @Pattern(regexp = RegexUtils.LETTER_REGEX)
+    @Pattern(regexp = RegexUtils.LETTER_REGEX, message = ErrorMessage.INVALID_NAME_FORMAT_MESSAGE)
     private String name;
 
     @Valid
