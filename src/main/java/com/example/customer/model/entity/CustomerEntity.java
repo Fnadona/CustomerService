@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Entity
 @Data
 @Table(name = "CUSTOMER_INFO")
@@ -47,8 +49,15 @@ public class CustomerEntity {
         this.documentType = customer.getDocumentType().toUpperCase();
         this.documentCode = customer.getDocumentCode().trim().toUpperCase();
         this.email = customer.getEmail().toUpperCase();
-        this.phone = customer.getPhone().trim();
+        this.phone = useTrim(customer.getPhone());
         this.accountStatus = AccountStatus.INACTIVE.name();
 
+    }
+
+    private String useTrim(String field){
+        if (field == null){
+            return null;
+        } else
+            return field.trim();
     }
 }

@@ -7,29 +7,27 @@ import com.example.customer.model.request.CustomerRequest;
 import com.example.customer.model.entity.CustomerEntity;
 import com.example.customer.model.response.CustomerResponse;
 import com.example.customer.repository.CustomerRepository;
-import jakarta.persistence.OptimisticLockException;
-import org.hibernate.PersistentObjectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-
 @Service
 public class CustomerServiceImpl implements CustomerService{
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    private final CustomerResponse customerResponse;
 
     @Autowired
-    private CustomerResponse customerResponse;
+    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerResponse customerResponse){
+        this.customerRepository = customerRepository;
+        this.customerResponse = customerResponse;
+    }
 
     @Override
-    public CustomerResponse registerCustomer(CustomerRequest customer){
-        try{
-            CustomerEntity customerEntity = customerRepository.save(new CustomerEntity(customer));
+    public CustomerResponse registerCustomer(CustomerRequest customerRequest){
 
-            return customerResponse.fromEntity(customerEntity);
+        try{
+            return saveCustomer(customerRequest);
         } catch (IllegalArgumentException | OptimisticLockingFailureException e){
             throw new PersistenceErrorException(e);
         } catch (Exception e){
@@ -39,10 +37,16 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public CustomerResponse getCustomerById(Long id) throws CustomerNotFoundException {
-
         CustomerEntity customerEntity = customerRepository.findById(id)
                 .orElseThrow(() -> new CustomerNotFoundException(id));
 
         return customerResponse.fromEntity(customerEntity);
     }
+
+    private CustomerResponse saveCustomer(CustomerRequest customerRequest) {
+        CustomerEntity customerEntity = customerRepository.save(new CustomerEntity(customerRequest));
+
+        return customerResponse.fromEntity(customerEntity);
+    }
+
 }

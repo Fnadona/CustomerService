@@ -20,7 +20,7 @@ public abstract class CustomerRequestProvider {
         providers.put("Request with all fields", customerRequestWithAllFields);
         providers.put("Request without phone", customerRequestWithoutPhone);
     }
-    static final private Address addressWithAllFields = Address.builder()
+    static final public Address addressWithAllFields = Address.builder()
                 .street("Rua teste")
                 .number("123456")
                 .complement("Complemento teste")
@@ -30,7 +30,7 @@ public abstract class CustomerRequestProvider {
                 .country("País teste")
                 .build();
 
-    static final private CustomerRequest customerRequestWithAllFields =
+    static final public CustomerRequest customerRequestWithAllFields =
             CustomerRequest.builder()
                 .name("Nome teste")
                 .address(addressWithAllFields)
@@ -40,7 +40,7 @@ public abstract class CustomerRequestProvider {
                 .phone("321654987")
                 .build();
 
-    static final private CustomerRequest customerRequestWithoutPhone =
+    static final public CustomerRequest customerRequestWithoutPhone =
             CustomerRequest.builder()
                 .name("Nome teste")
                 .address(addressWithAllFields)
