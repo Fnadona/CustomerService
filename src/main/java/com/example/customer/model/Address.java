@@ -1,7 +1,7 @@
 package com.example.customer.model;
 
 import com.example.customer.model.entity.AddressEntity;
-import com.example.customer.exceptions.ErrorMessage;
+import com.example.customer.exceptions.structure.ErrorMessage;
 import com.example.customer.utils.RegexUtils;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

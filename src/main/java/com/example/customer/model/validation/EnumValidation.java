@@ -1,6 +1,6 @@
 package com.example.customer.model.validation;
 
-import com.example.customer.exceptions.ErrorMessage;
+import com.example.customer.exceptions.structure.ErrorMessage;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

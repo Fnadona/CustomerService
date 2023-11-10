@@ -1,5 +1,6 @@
 package com.example.customer.controler;
 
+import com.example.customer.exceptions.UserNotFoundException;
 import com.example.customer.model.request.CustomerRequest;
 import com.example.customer.model.response.CustomerResponse;
 import com.example.customer.service.CustomerService;
@@ -35,5 +36,17 @@ public class CustomerController {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable Long id) throws UserNotFoundException {
+
+        log.info("Requesting for getting the customer {}.", id);
+
+        CustomerResponse response = customerService.getCustomerById(id);
+
+        log.info("Customer {} was found successfully", id);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

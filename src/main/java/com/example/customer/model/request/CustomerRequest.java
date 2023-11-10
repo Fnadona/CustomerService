@@ -2,7 +2,7 @@ package com.example.customer.model.request;
 
 import com.example.customer.model.Address;
 import com.example.customer.model.enums.DocumentType;
-import com.example.customer.exceptions.ErrorMessage;
+import com.example.customer.exceptions.structure.ErrorMessage;
 import com.example.customer.model.validation.EnumValidation;
 import com.example.customer.utils.RegexUtils;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

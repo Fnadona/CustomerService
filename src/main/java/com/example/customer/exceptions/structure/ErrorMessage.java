@@ -1,4 +1,4 @@
-package com.example.customer.exceptions;
+package com.example.customer.exceptions.structure;
 
 public abstract class ErrorMessage {
 
@@ -25,5 +25,7 @@ public abstract class ErrorMessage {
     public static final String INVALID_COUNTRY_FORMAT_MESSAGE = "There are invalid character in country (use only letters, letters with accents and numbers).";
     public static final String INVALID_NUMBER_FORMAT_MESSAGE = "There must be only numbers in field number.";
     public static final String INVALID_POSTAL_CODE_FORMAT_MESSAGE = "There must be only numbers in postal code.";
+    public static final String SQL_PERSISTENCE_ERROR_MESSAGE = "It wasn't possible to persist the customer";
+    public static final String SQL_CUSTOMER_NOT_FOUND_MESSAGE = "Customer not found";
 
 }
