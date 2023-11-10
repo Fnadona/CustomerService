@@ -1,15 +1,20 @@
 package com.example.customer.service;
 
-import com.example.customer.exceptions.structure.ErrorMessage;
-import com.example.customer.exceptions.UserNotFoundException;
+import com.example.customer.exceptions.ParseErrorException;
+import com.example.customer.exceptions.PersistenceErrorException;
+import com.example.customer.exceptions.CustomerNotFoundException;
 import com.example.customer.model.request.CustomerRequest;
 import com.example.customer.model.entity.CustomerEntity;
 import com.example.customer.model.response.CustomerResponse;
 import com.example.customer.repository.CustomerRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.persistence.OptimisticLockException;
+import org.hibernate.PersistentObjectException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.text.ParseException;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -19,24 +24,24 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     private CustomerResponse customerResponse;
 
-    private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class.getSimpleName());
-
     @Override
     public CustomerResponse registerCustomer(CustomerRequest customer){
         try{
             CustomerEntity customerEntity = customerRepository.save(new CustomerEntity(customer));
 
             return customerResponse.fromEntity(customerEntity);
+        } catch (IllegalArgumentException | OptimisticLockingFailureException e){
+            throw new PersistenceErrorException(e);
         } catch (Exception e){
-            throw new RuntimeException(ErrorMessage.SQL_PERSISTENCE_ERROR_MESSAGE, e.getCause());
+            throw new ParseErrorException(e);
         }
     }
 
     @Override
-    public CustomerResponse getCustomerById(Long id) throws UserNotFoundException {
+    public CustomerResponse getCustomerById(Long id) throws CustomerNotFoundException {
 
         CustomerEntity customerEntity = customerRepository.findById(id)
-                .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(() -> new CustomerNotFoundException(id));
 
         return customerResponse.fromEntity(customerEntity);
     }
